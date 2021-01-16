@@ -1,66 +1,58 @@
 {
-    "name": "Docker Container",
-    "id": "dockercontainer",
+    "name": "nodetube",
+    "id": "nodetube",
+    "packaging_format": 1,
     "description": {
-        "en": "Docker allows to deploy applications which have not yet been integrated with YunoHost",
-        "fr": "Docker permet de déployer des applications qui n'ont pas encore été intégrées à YunoHost"
+        "en": "nodetube package for YunoHost.",
+        "fr": "nodetube pour YunoHost."
     },
-    "developer": {
-        "name": "scith"
+    "version": "2.0",
+    "url": "https://github.com/mayeaux/nodetube",
+    "license": " licencia MIT ",
+    "maintainer": {
+        "name": "discapacidad5",
+        "email": "discapacidad5@gmail.com"
     },
-    "multi_instance": "true",
+    "requirements": {
+        "yunohost": ">= 2.7.2"
+    },
+    "multi_instance": false,
+    "services": [
+        "Node.js 8.0+",
+        "MongoDB",
+        "ffmpeg",
+        "Redis"
+    ],
     "arguments": {
-        "install" : [
-			{
-                "name": "name",
+        "install": [{
+                "name": "domain",
+                "type": "domain",
                 "ask": {
-                    "en": "Enter the container's name",
-                    "fr": "Entrez le nom du conteneur"
+                    "en": "Choose a domain name for nodetube",
+                    "fr": "Choisissez un nom de domaine pour nodetube"
                 },
-                "example": "sonarr"
+                "example": "example.com"
             },
-			{
-                "name": "repository",
-                "ask": {
-                    "en": "Enter the container's repository (http://registry.hub.docker.com)",
-                    "fr": "Entrez le dépôt du conteneur (http://registry.hub.docker.com)"
-                },
-                "example": "tuxeh/sonarr"
-            },
-			{
-                "name": "restart",
-                "ask": {
-                    "en": "Do you want the container to be always restarted?",
-                    "fr": "Souhaitez-vous que le conteneur soit automatiquement redémarré ?"
-                },
-                "choices": ["Yes", "No"],
-                "default": "Yes"
-            },
-			{
-                "name": "datacontainer",
-                "ask": {
-                    "en": "Do you want to store data in a data volume container? (See https://docs.docker.com/userguide/dockervolumes/)",
-                    "fr": "Souhaitez-vous activer la fonctionnalité de backup s'appuyant sur des conteneurs de données ? (Voir explications sur GitHub)"
-                },
-                "choices": ["Yes", "No"],
-                "default": "Yes"
-            },
-			{
-                "name": "volume",
-                "ask": {
-                    "en": "Do you want to create the folder /home/yunohost.docker/container-NAME in order to mount it in the container?",
-                    "fr": "Souhaitez-vous créer le dossier /home/yunohost.docker/container-NAME afin de pouvoir le monter dans le conteneur ?"
-                },
-                "choices": ["Yes", "No"],
-                "default": "No"
-            },
+
             {
-                "name": "command",
+                "name": "path",
+                "type": "path",
                 "ask": {
-                    "en": "Enter the container's options",
-                    "fr": "Entrez les options du conteneur"
+                    "en": "Choose a path for nodetube /nodetube is accepted",
+                     "fr": "Choisissez un chemin pour nodetube /nodetube est accepté"
                 },
-                "example": "-p 127.0.0.1:8989:8989 -v /home/yunohost.docker/container-NAME/:/home/yunohost/"
+                "example": "/nodetube",
+                "default": "/nodetube"
+            },
+            
+            {
+                "name": "is_public",
+                "type": "boolean",
+                "ask": {
+                    "en": "Is it a public site ?",
+                    "fr": "Est-ce un site public ?"
+                },
+                "default": "true"
             }
         ]
     }
